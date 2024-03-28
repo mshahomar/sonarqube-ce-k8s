@@ -1,2 +1,2 @@
 # sonarqube-ce-k8s
-sonarqube on EKS
+sonarqube-ce (LTS) on EKS, EFS
