@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: sonarqube
   labels:
     app: sonarqube
     name: sonarqube
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
         - name: sonarqube
-          image: sonarqube:8.9.2-community
+          image: sonarqube:lts-community
           resources:
             requests:
               cpu: 500m
