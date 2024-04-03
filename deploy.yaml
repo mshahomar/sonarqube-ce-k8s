@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: sonarqube
-          image: sonarqube:lts-community
+          image: xxxxxxxxxxxx.dkr.ecr.xxxxxxxxxxxxxx.amazonaws.com/sonarqube:9.9.4.87374
           resources:
             requests:
               cpu: 500m
@@ -26,21 +26,21 @@ spec:
               cpu: 2000m
               memory: 2048Mi
             volumeMounts:
-            - mountPath: "/opt/sonarqube/data/"
-              name: sonar-data
-            - mountPath: "/opt/sonarqube/extensions/"
-              name: sonar-data
+              - mountPath: /opt/sonarqube/data/
+                name: sonar-data
+              - mountPath: /opt/sonarqube/extensions/
+                name: sonar-data
             env:
-              - name: "SONARQUBE_JDBC_USERNAME"
-                value: "postgres"
-              - name: "SONARQUBE_JDBC_URL"
-                value: "jdbc:postgresql://postgresql-dev/sonar"
-              - name: "SONARQUBE_JDBC_PASSWORD"
-                valueFrom:  
-                  secretKeyRef:  
-                    name: postgres  
-                    key: password
-              ports:
+              - name: SONARQUBE_JDBC_USERNAME
+                value: myuser
+              - name: SONARQUBE_JDBC_URL
+                value: jdbc:postgresql://xxxxxx.xxxxxxxxxxxxxx.rds.amazonaws.com:5432/db
+              - name: SONARQUBE_JDBC_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: postgres
+                    key: mypass
+            ports:
               - containerPort: 9000
                 protocol: TCP
       volumes:

@@ -1,0 +1,27 @@
+version: '3.6'
+services:
+  sonarqube:
+    build:
+      context: .
+    stdin_open: true
+    tty: true
+    ports:
+      - '80:9000'
+    volumes:
+      - ./conf/sonar.properties:/opt/sonarqube/conf/sonar.properties
+      - ./sonarqube_data:/opt/sonarqube/data
+      - ./sonarqube_extensions:/opt/sonarqube/extensions
+      - ./sonarqube_logs:/opt/sonarqube/logs
+        #- ./sonarqube_temp:/opt/sonarqube/temp
+    #shm_size: '256m'
+    networks:
+      - network
+    environment:
+      - SONARQUBE_JDBC_USERNAME=myuser
+      - SONARQUBE_JDBC_URL="jdbc:postgresql://xxxxxx.xxxxxxxxxxxxxx.rds.amazonaws.com:5432/db"
+      - SONARQUBE_JDBC_PASSWORD=mypass
+
+networks:
+  network:
+    driver: bridge
+    name: sonarqube_network
